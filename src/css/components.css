@@ -1,0 +1,6 @@
+.audio-single {
+  display: block;
+  margin: .7rem auto;
+  width: 100%;
+  max-width: 320px;
+}

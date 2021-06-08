@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ABX from './user-studies/abx'
+import Qualification from './user-studies/qualification'
 
 import './css/user-study.css'
 
@@ -8,6 +8,6 @@ import './css/user-study.css'
 export default function UserStudy() {
   return (
     <div className='user-study'>
-      <ABX />
+      <Qualification />
     </div>);
 }

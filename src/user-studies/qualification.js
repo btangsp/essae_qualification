@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 
 import { Audio } from '../components'
+import { AudioRadioButtonGroup } from '../components'
+import { Shuffle } from '../components'
 import { MultipleChoice } from '../components'
 import { updateChoice } from '../components'
 
@@ -84,7 +86,26 @@ function Disorder_Question(index, setIndex, choice, setChoice) {
 	);
 }
 
-function Question_Pages(index, setIndex) {
+function Calibration_Page(index, setIndex, audioRef, UpdateAudio) {
+	return (
+		<div className="container grid">
+			<div className="section col-all">
+				<ReactMarkdown source={`### **Calibration**\n**Please wear your 
+					headphones now for calibration.**  \nFirst, set your computer 
+					volume to about 25% of maximum.  \nPress the button, then turn 
+					up the volume on your computer until the calibration noise 
+					is at a loud but comfortable level.  \nFeel free to play the 
+					calibration sound as many times as you like.`}/>
+				<Audio name={'qualification'} file={'noise_calib_stim.wav'} audioRef={audioRef}/>
+				<div className="section col-2 align-right">
+					<a href="#" className="button" onClick={() => clickHandler(index, setIndex)}>Next</a>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+function Question_Pages(index, setIndex, audioRef, UpdateAudio) {
 	const [choice, setChoice] = useState(-1);
 
 	switch (index) {
@@ -94,6 +115,8 @@ function Question_Pages(index, setIndex) {
 			return Age_Question(index, setIndex, choice, setChoice);
 		case 2:
 			return Disorder_Question(index, setIndex, choice, setChoice);
+		case 3:
+			return Calibration_Page(index, setIndex, audioRef, UpdateAudio);
 		default:
 			return (
 				<div className="container">
@@ -107,9 +130,18 @@ export default function Qualification() {
 
 	const [index, setIndex] = useState(0);
 
+	const audioRef = useRef();
+
+	const UpdateAudio = (source) => {
+		if (audioRef.current) {
+			audioRef.current.pause();
+			audioRef.current.load();
+		}
+	}
+
 	return (
 		<div>
-			{Question_Pages(index, setIndex)}
+			{Question_Pages(index, setIndex, audioRef, UpdateAudio)}
 		</div>
 	);
 }

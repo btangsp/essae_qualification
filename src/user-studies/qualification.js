@@ -28,15 +28,33 @@ function Welcome_Page(index, setIndex) {
 	return (
 		<div className="container grid">
 			<div className="section col-all">
-				<ReactMarkdown source={`# **Welcome!**\nPlease read the following information 
-					carefully before you decide to take part. This will tell you why the 
-					research is being done and what you will be asked to do if you take part. 
-					Please ask if there is anything that is not clear or if you would like 
-					more information.`}
+				<ReactMarkdown source={`# **Welcome!**\nPlease read the 
+					following information carefully before you decide to take 
+					part. This will tell you why the research is being done 
+					and what you will be asked to do if you take part. Please 
+					ask if there is anything that is not clear or if you would 
+					like more information. \n\nWe are conducting a research 
+					study to determine whether or not a time-stretching 
+					algorithm that was have developed produces higher-quality 
+					audio\u2014meaning that the audio sounds more natural and 
+					has fewer glitches. \n\nIf you agree to participate, you 
+					will be asked to fill out a brief questionnaire about your 
+					age, your hearing ability, as well as the listening setup 
+					you intend to use for our study. Should you be selected to 
+					perform evaluations, you will perform a series of tasks 
+					which involve comparing two different audio samples and 
+					responding with the audio sample which you believe to be 
+					higher-quality. \n\nThe entire interaction is completely 
+					anonymous. We will NOT collect any personally identifiable 
+					identifiers. Your participation in this study does not 
+					involve any risk to you beyond that of your everyday 
+					life.\n\nBy pressing **I Agree**, you confirm you are 
+					willing to participate in this research. However, you are 
+					free to withdraw your participation at anytime.`}
 				/>
 			</div>
 			<div className="section col-2 align-right">
-				<a href="#" className="button" onClick={() => clickHandler(index, setIndex)}>Start</a>
+				<a href="#" className="button" onClick={() => clickHandler(index, setIndex)}>I Agree</a>
 			</div>
 		</div>
 	);

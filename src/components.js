@@ -38,9 +38,14 @@ export function Shuffle(arr, n) {
 	return arr.slice(0, nInd);
 }
 
-export function Audio({ name, file, audioRef }) {
+export function Audio({ name, file, audioRef, setAudioEnded }) {
 	return (
-		<audio className='audio-single' controls ref={audioRef} controlsList="nodownload">
+		<audio 
+			className='audio-single' 
+			controls 
+			ref={audioRef} 
+			controlsList="nodownload"
+			onEnded={() => {if (typeof(setAudioEnded) !== "undefined") {setAudioEnded(true);}}}>
 			<source src={`user-studies/${name}/audio/${file}`} type='audio/mpeg'/>
 		</audio>);
 };
@@ -86,7 +91,6 @@ export function AudioRadioButtonGroup({ name, files, choice, setChoice, audioRef
 };
 
 export function Choice({ index, choice, setChoice, label }) {
-	console.log(choice);
 	return (
 		<li className="grid">
 			<input type="radio" id={index} />

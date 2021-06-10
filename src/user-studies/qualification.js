@@ -9,10 +9,18 @@ import { updateChoice } from '../components'
 
 import '../css/user-studies.css'
 
-function clickHandler(index, setIndex) {
+const shuffledData = Shuffle(["IOS", "ISO", "OIS", "OSI", "SIO", "SOI"]);
+
+function clickHandler(index, setIndex, setChoice, UpdateAudio, setAudioEnded) {
 	setIndex(index + 1);
-	if (index > 0) {
+	if (setChoice !== undefined) {
 		updateChoice(-1);
+	}
+	if (UpdateAudio !== undefined) {
+		UpdateAudio();
+	}
+	if (setAudioEnded !== undefined) {
+		setAudioEnded(false);
 	}
 }
 
@@ -40,7 +48,7 @@ function Age_Question(index, setIndex, choice, setChoice) {
 	if (choice !== -1) {
 		next_button = (
 			<div className="section col-2 align-right">
-				<a href="#" className="button" onClick={() => clickHandler(index, setIndex)}>Next</a>
+				<a href="#" className="button" onClick={() => clickHandler(index, setIndex, setChoice)}>Next</a>
 			</div>
 		);
 	}
@@ -65,7 +73,7 @@ function Disorder_Question(index, setIndex, choice, setChoice) {
 	if (choice !== -1) {
 		next_button = (
 			<div className="section col-2 align-right">
-				<a href="#" className="button" onClick={() => clickHandler(index, setIndex)}>Next</a>
+				<a href="#" className="button" onClick={() => clickHandler(index, setIndex, setChoice)}>Next</a>
 			</div>
 		);
 	}
@@ -86,7 +94,15 @@ function Disorder_Question(index, setIndex, choice, setChoice) {
 	);
 }
 
-function Calibration_Page(index, setIndex, audioRef, UpdateAudio) {
+function Calibration_Page(index, setIndex, audioRef, UpdateAudio, audioEnded, setAudioEnded) {
+	let next_button = null;
+	if (audioEnded) {
+		next_button = (
+			<div className="section col-2 align-right">
+				<a href="#" className="button" onClick={() => clickHandler(index, setIndex, undefined, UpdateAudio, setAudioEnded)}>Next</a>
+			</div>
+		);
+	}
 	return (
 		<div className="container grid">
 			<div className="section col-all">
@@ -96,17 +112,70 @@ function Calibration_Page(index, setIndex, audioRef, UpdateAudio) {
 					up the volume on your computer until the calibration noise 
 					is at a loud but comfortable level.  \nFeel free to play the 
 					calibration sound as many times as you like.`}/>
-				<Audio name={'qualification'} file={'noise_calib_stim.wav'} audioRef={audioRef}/>
-				<div className="section col-2 align-right">
-					<a href="#" className="button" onClick={() => clickHandler(index, setIndex)}>Next</a>
-				</div>
+				<Audio 
+					name={'qualification'} 
+					file={'noise_calib_stim.wav'} 
+					audioRef={audioRef} 
+					setAudioEnded={setAudioEnded}/>
+				<ReactMarkdown source={`Press **Next** when you are satisfied with the volume level.`}/>
+				{next_button}
 			</div>
 		</div>
 	);
 }
 
+function HeadphoneCheck_Page(index, setIndex, choice, setChoice, audioRef, UpdateAudio, audioEnded, setAudioEnded) {
+	let multiple_choice = null;
+	if (audioEnded) {
+		multiple_choice = (
+			<MultipleChoice
+				index={index}
+				choice={choice}
+				setChoice={setChoice}
+				labels={["FIRST sound was QUIETEST", "SECOND sound was QUIETEST", "THIRD sound was QUIETEST"]}/>
+		);
+	}
+	let next_button = null;
+	if (choice !== -1) {
+		next_button = (
+			<div className="section col-2 align-right">
+				<a href="#" className="button" onClick={() => clickHandler(index, setIndex, setChoice, UpdateAudio, setAudioEnded)}>Next</a>
+			</div>
+		);
+	}
+	let file = "antiphase_HC_" + shuffledData[index] + ".wav";
+	return (
+		<div className="container grid">
+			<div className="section col-all">
+				<ReactMarkdown source={`**Question 3.** When you hit play, you will hear three sounds 
+					separated by silences.  \nSimply judge WHICH SOUND WAS QUIETEST 
+					 \u2014 1, 2, or 3? (${index + 1} of ${shuffledData.length})`}/>
+				<Audio
+					name={'qualification'}
+					file={file}
+					audioRef={audioRef}
+					setAudioEnded={setAudioEnded}/>
+				{multiple_choice}
+				{next_button}
+			</div>
+		</div>
+	);
+}
+
+function HeadphoneCheck_Pages(index, setIndex, choice, setChoice, audioRef, UpdateAudio, audioEnded, setAudioEnded, index_h, setIndex_h) {
+	if (index_h < shuffledData.length) {
+		return HeadphoneCheck_Page(index_h, setIndex_h, choice, setChoice, audioRef, UpdateAudio, audioEnded, setAudioEnded);
+	}
+	else {
+		setIndex(index + 1);
+		return;
+	}
+}
+
 function Question_Pages(index, setIndex, audioRef, UpdateAudio) {
 	const [choice, setChoice] = useState(-1);
+	const [audioEnded, setAudioEnded] = useState(false);
+	const [index_h, setIndex_h] = useState(0);
 
 	switch (index) {
 		case 0:
@@ -116,7 +185,9 @@ function Question_Pages(index, setIndex, audioRef, UpdateAudio) {
 		case 2:
 			return Disorder_Question(index, setIndex, choice, setChoice);
 		case 3:
-			return Calibration_Page(index, setIndex, audioRef, UpdateAudio);
+			return Calibration_Page(index, setIndex, audioRef, UpdateAudio, audioEnded, setAudioEnded);
+		case 4:
+			return HeadphoneCheck_Pages(index, setIndex, choice, setChoice, audioRef, UpdateAudio, audioEnded, setAudioEnded, index_h, setIndex_h);
 		default:
 			return (
 				<div className="container">

@@ -33,7 +33,9 @@ function Welcome_Page(index, setIndex) {
 					part. This will tell you why the research is being done 
 					and what you will be asked to do if you take part. Please 
 					ask if there is anything that is not clear or if you would 
-					like more information. \n\nWe are conducting a research 
+					like more information. If you have any questions or 
+					feedback, please contact the principal investigator, Bryan 
+					Pardo, at pardo@northwestern.edu. \n\nWe are conducting a research 
 					study to determine whether or not a time-stretching 
 					algorithm that was have developed produces higher-quality 
 					audio\u2014meaning that the audio sounds more natural and 

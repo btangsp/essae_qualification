@@ -165,9 +165,9 @@ function HeadphoneCheck_Page(index, setIndex, choice, setChoice, audioRef, Updat
 	return (
 		<div className="container grid">
 			<div className="section col-all">
-				<ReactMarkdown source={`**Question 3.** When you hit play, you will hear three sounds 
+				<ReactMarkdown source={`**Listening Test ${index + 1} of ${shuffledData.length}.** When you hit play, you will hear three sounds 
 					separated by silences.  \nSimply judge WHICH SOUND WAS QUIETEST 
-					 \u2014 1, 2, or 3? (${index + 1} of ${shuffledData.length})`}/>
+					 \u2014 1, 2, or 3?`}/>
 				<Audio
 					name={'qualification'}
 					file={file}

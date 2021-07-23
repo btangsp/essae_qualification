@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/essae_qualification/static/css/main.2a77985a.chunk.css",
+    "main.js": "/essae_qualification/static/js/main.076fc697.chunk.js",
+    "main.js.map": "/essae_qualification/static/js/main.076fc697.chunk.js.map",
+    "runtime-main.js": "/essae_qualification/static/js/runtime-main.879ebc7a.js",
+    "runtime-main.js.map": "/essae_qualification/static/js/runtime-main.879ebc7a.js.map",
+    "static/js/2.5c5c5081.chunk.js": "/essae_qualification/static/js/2.5c5c5081.chunk.js",
+    "static/js/2.5c5c5081.chunk.js.map": "/essae_qualification/static/js/2.5c5c5081.chunk.js.map",
+    "index.html": "/essae_qualification/index.html",
+    "static/css/main.2a77985a.chunk.css.map": "/essae_qualification/static/css/main.2a77985a.chunk.css.map",
+    "static/js/2.5c5c5081.chunk.js.LICENSE.txt": "/essae_qualification/static/js/2.5c5c5081.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.879ebc7a.js",
+    "static/js/2.5c5c5081.chunk.js",
+    "static/css/main.2a77985a.chunk.css",
+    "static/js/main.076fc697.chunk.js"
+  ]
+}

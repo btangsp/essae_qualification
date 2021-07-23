@@ -244,7 +244,7 @@ function Question_Pages(index, setIndex, audioRef, UpdateAudio) {
 			return EarlyFinish_Page();
 		default:
 			return (
-				<Redirect to={'https://btangsp.github.io/essae_training/'} />
+				<Redirect to={'/essae_training'} />
 			);
 	}
 }

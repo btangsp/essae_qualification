@@ -159,6 +159,64 @@ function Calibration_Page(index, setIndex, audioRef, UpdateAudio, audioEnded, se
 	);
 }
 
+function ListeningDevice_Question(index, setIndex, choice, setChoice) {
+	let next_button = null;
+	let isEarlyFinish = false;
+	if (choice !== -1) {
+		if (choice !== 0) {
+			isEarlyFinish = true;
+		}
+		next_button = (
+			<div className="section col-2 align-right">
+				<a href="#" className="button" onClick={() => clickHandler(index, setIndex, setChoice, undefined, undefined, isEarlyFinish)}>Next</a>
+			</div>
+		);
+	}
+	return (
+		<div className="container grid">
+			<div className="section col-all">
+				<ReactMarkdown source={`**Question ${index}.** Which listening device are you currently using?`}/>
+				<MultipleChoice 
+					index={index}
+					choice={choice}
+					setChoice={setChoice}
+					labels={["Headphones/Earbuds", "Stand-Alone Speakers", "Built-In-Device Speakers", "Other"]}
+				/>
+			</div>
+			{next_button}
+		</div>
+	);
+}
+
+function Environment_Question(index, setIndex, choice, setChoice) {
+	let next_button = null;
+	let isEarlyFinish = false;
+	if (choice !== -1) {
+		if (choice === 1) {
+			isEarlyFinish = true;
+		}
+		next_button = (
+			<div className="section col-2 align-right">
+				<a href="#" className="button" onClick={() => clickHandler(index, setIndex, setChoice, undefined, undefined, isEarlyFinish)}>Next</a>
+			</div>
+		);
+	}
+	return (
+		<div className="container grid">
+			<div className="section col-all">
+				<ReactMarkdown source={`**Question ${index}.** Are you in a quiet environment?`}/>
+				<MultipleChoice 
+					index={index}
+					choice={choice}
+					setChoice={setChoice}
+					labels={["Yes", "No"]}
+				/>
+			</div>
+			{next_button}
+		</div>
+	);
+}
+
 function HeadphoneCheck_Page(index, setIndex, choice, setChoice, audioRef, UpdateAudio, audioEnded, setAudioEnded) {
 	let multiple_choice = null;
 	if (audioEnded) {
@@ -238,8 +296,12 @@ function Question_Pages(index, setIndex, audioRef, UpdateAudio) {
 		case 2:
 			return Disorder_Question(index, setIndex, choice, setChoice);
 		case 3:
-			return Calibration_Page(index, setIndex, audioRef, UpdateAudio, audioEnded, setAudioEnded);
+			return ListeningDevice_Question(index, setIndex, choice, setChoice);
 		case 4:
+			return Environment_Question(index, setIndex, choice, setChoice);
+		case 5:
+			return Calibration_Page(index, setIndex, audioRef, UpdateAudio, audioEnded, setAudioEnded);
+		case 6:
 			return HeadphoneCheck_Pages(index, setIndex, choice, setChoice, audioRef, UpdateAudio, audioEnded, setAudioEnded, index_h, setIndex_h);
 		case 'early_finish':
 			return EarlyFinish_Page();

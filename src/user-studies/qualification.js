@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
+
 
 import { Audio } from '../components'
 import { AudioRadioButtonGroup } from '../components'
@@ -244,7 +245,11 @@ function Question_Pages(index, setIndex, audioRef, UpdateAudio) {
 			return EarlyFinish_Page();
 		default:
 			return (
-				<Redirect to={'/essae_training/'} />
+				// <Redirect to={'/essae_training/'} />
+				<div className="container">
+					<ReactMarkdown source={`Click next to start the training section.`}/>
+					<a href="https://btangsp.github.io/essae_training/" className="button">Next</a>
+				</div>
 			);
 	}
 }

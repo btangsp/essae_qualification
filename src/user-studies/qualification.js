@@ -129,36 +129,6 @@ function Disorder_Question(index, setIndex, choice, setChoice) {
 	);
 }
 
-function Calibration_Page(index, setIndex, audioRef, UpdateAudio, audioEnded, setAudioEnded) {
-	let next_button = null;
-	if (audioEnded) {
-		next_button = (
-			<div className="section col-2 align-right">
-				<a href="#" className="button" onClick={() => clickHandler(index, setIndex, undefined, UpdateAudio, setAudioEnded)}>Next</a>
-			</div>
-		);
-	}
-	return (
-		<div className="container grid">
-			<div className="section col-all">
-				<ReactMarkdown source={`### **Calibration**\n**Please wear your 
-					headphones now for calibration.**  \nFirst, set your computer 
-					volume to about 25% of maximum.  \nPress the button, then turn 
-					up the volume on your computer until the calibration noise 
-					is at a loud but comfortable level.  \nFeel free to play the 
-					calibration sound as many times as you like.`}/>
-				<Audio 
-					name={'qualification'} 
-					file={'noise_calib_stim.wav'} 
-					audioRef={audioRef} 
-					setAudioEnded={setAudioEnded}/>
-				<ReactMarkdown source={`Press **Next** when you are satisfied with the volume level.`}/>
-				{next_button}
-			</div>
-		</div>
-	);
-}
-
 function ListeningDevice_Question(index, setIndex, choice, setChoice) {
 	let next_button = null;
 	let isEarlyFinish = false;
@@ -213,6 +183,36 @@ function Environment_Question(index, setIndex, choice, setChoice) {
 				/>
 			</div>
 			{next_button}
+		</div>
+	);
+}
+
+function Calibration_Page(index, setIndex, audioRef, UpdateAudio, audioEnded, setAudioEnded) {
+	let next_button = null;
+	if (audioEnded) {
+		next_button = (
+			<div className="section col-2 align-right">
+				<a href="#" className="button" onClick={() => clickHandler(index, setIndex, undefined, UpdateAudio, setAudioEnded)}>Next</a>
+			</div>
+		);
+	}
+	return (
+		<div className="container grid">
+			<div className="section col-all">
+				<ReactMarkdown source={`### **Calibration**\n**Please wear your 
+					headphones now for calibration.**  \nFirst, set your computer 
+					volume to about 25% of maximum.  \nPress the button, then turn 
+					up the volume on your computer until the calibration noise 
+					is at a loud but comfortable level.  \nFeel free to play the 
+					calibration sound as many times as you like.`}/>
+				<Audio 
+					name={'qualification'} 
+					file={'noise_calib_stim.wav'} 
+					audioRef={audioRef} 
+					setAudioEnded={setAudioEnded}/>
+				<ReactMarkdown source={`Press **Next** when you are satisfied with the volume level.`}/>
+				{next_button}
+			</div>
 		</div>
 	);
 }

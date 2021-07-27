@@ -233,7 +233,14 @@ function HeadphoneCheck_Page(index, setIndex, choice, setChoice, audioRef, Updat
 	if (choice !== shuffledData[index].indexOf('S')) {
 		isEarlyFinish = true;
 	}
-	if (choice !== -1) {
+	if (choice !== -1 && !isEarlyFinish && index === shuffledData.length - 1) {
+		next_button = (
+			<div className="section col-2 align-right">
+				<a href="https://btangsp.github.io/essae_training/" className="button">Next</a>	
+			</div>
+		);
+	}
+	else if (choice !== -1) {
 		next_button = (
 			<div className="section col-2 align-right">
 				<a href="#" className="button" onClick={() => clickHandler(index, setIndex, setChoice, UpdateAudio, setAudioEnded, isEarlyFinish)}>Next</a>
@@ -309,8 +316,7 @@ function Question_Pages(index, setIndex, audioRef, UpdateAudio) {
 			return (
 				// <Redirect to={'/essae_training/'} />
 				<div className="container">
-					<ReactMarkdown source={`Click next to start the training section.`}/>
-					<a href="https://btangsp.github.io/essae_training/" className="button">Next</a>
+					Uh oh, something went wrong.
 				</div>
 			);
 	}
